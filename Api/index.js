@@ -8,6 +8,7 @@ const cors=require('cors')
 const app=express()
 const BookingRoute=require('./Routes/BookingForm/BookingRoute');
 const DayCardRoute=require('./Routes/DayCard/DayCardRoute')
+const AdminRoute=require('./Routes/Admin/AdminRoute')
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
@@ -38,6 +39,8 @@ mongoose.connect(dbConfig.url,{useUnifiedTopology:true,useNewUrlParser:true})
 app.use('/BookingForm',BookingRoute)
 
 app.use('/DayCard',DayCardRoute)
+
+app.use('/Admin',AdminRoute)
 
 app.listen(5000,()=>{
      console.log('Server is running at port 5000')

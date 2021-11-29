@@ -6,6 +6,7 @@ exports.register=(req,res)=>{
           Reason:req.body.Reason,
           Name:req.body.Name,
           Email:req.body.Email,
+          Date:req.body.Date,
           StartingTime:req.body.StartingTime,
           EndingTime:req.body.EndingTime
 
@@ -22,7 +23,11 @@ exports.register=(req,res)=>{
 
 exports.getBooking=(req,res)=>{
      Booking.find({
-          StartingTime:req.body.StartingTime
+          Date:req.body.Date
+     })
+     .sort({
+          StartingTime:req.body.StartingTime,
+          EndingTime:req.body.EndingTime
      })
      
      .then((data)=>{

@@ -18,6 +18,10 @@ const BookingFormSchema=mongoose.Schema({
           type:String,
           require:true
      },
+     Date:{
+          type:Date,
+          require:true
+     },
      StartingTime:{
           type:String,
           require:true
