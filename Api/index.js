@@ -25,15 +25,6 @@ mongoose.connect(dbConfig.url,{useUnifiedTopology:true,useNewUrlParser:true})
     process.exit()
 })
 
-// const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.nii5p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
- 
-//   client.close();
-//   console.log(collection)
-// });
 
 
 app.use('/BookingForm',BookingRoute)
