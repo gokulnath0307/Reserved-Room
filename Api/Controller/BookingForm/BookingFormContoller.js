@@ -1,12 +1,21 @@
 const Booking=require('../../Model/BookingForm/BookingForm');
 
 exports.register=(req,res)=>{
+
+     let date_ob = new Date();
+     let date = ("0" + date_ob.getDate()).slice(-2);
+     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+     let year = date_ob.getFullYear();
+
+     console.log(year + "-" + month + "-" + date);
+     
+
      Booking.create({
           Department:req.body.Department,
           Reason:req.body.Reason,
           Name:req.body.Name,
           Email:req.body.Email,
-          Date:req.body.Date,
+          Date:date,
           StartingTime:req.body.StartingTime,
           EndingTime:req.body.EndingTime
 

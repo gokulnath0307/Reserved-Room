@@ -1,14 +1,21 @@
 const User=require('../../Model/User/User')
-const hash=require('./Bcrypt')
-const jwt=require('./Jwtoken')
+const hash=require('../../Token/Bcrypt')
+const jwt=require('../../Token/Jwtoken')
 
-exports.register=(req,res)=>{
+exports.register= async(req,res)=>{
      const hashedPassword= await hash.hashPassword(req.body.Password)
+     let date_ob = new Date();
+     let date = ("0" + date_ob.getDate()).slice(-2);
+     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+     let year = date_ob.getFullYear();
+
+     console.log(date + "-" + month + "-" + year);
      User.create({
           Name:req.body.Name,
           Department:req.body.Department,
           Email:req.body.Email,
-          Password:hashedPassword
+          Password:hashedPassword,
+          Date:date_ob
      })
      .then((data)=>{
           res.send(data)

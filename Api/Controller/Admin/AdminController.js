@@ -1,6 +1,6 @@
 const Admin = require('../../Model/Admin/Admin')
-const hash=require('./Bcrypt')
-const jwt=require('./Jwtoken')
+const hash=require('../../Token/Bcrypt')
+const jwt=require('../../Token/Jwtoken')
 
 exports.register=async(req,res)=>{
      const hashedPassword= await hash.hashPassword(req.body.Password)
