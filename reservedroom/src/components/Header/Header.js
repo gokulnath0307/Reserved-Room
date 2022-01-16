@@ -13,9 +13,7 @@ export default function Header() {
                 </p>
                 </p>
         </div>
-        <div>
-            <Table/>
-        </div>
+       <Table/>
         </div>
     )
 }

@@ -3,19 +3,14 @@ const hash=require('../../Token/Bcrypt')
 const jwt=require('../../Token/Jwtoken')
 
 exports.register= async(req,res)=>{
-     const hashedPassword= await hash.hashPassword(req.body.Password)
-     let date_ob = new Date();
-     let date = ("0" + date_ob.getDate()).slice(-2);
-     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-     let year = date_ob.getFullYear();
-
-     console.log(date + "-" + month + "-" + year);
+     const hashedPassword= await hash.hashPassword(req.body.password)
+    
      User.create({
-          Name:req.body.Name,
-          Department:req.body.Department,
-          Email:req.body.Email,
-          Password:hashedPassword,
-          Date:date_ob
+          name:req.body.name,
+          department:req.body.department,
+          email:req.body.email,
+          password:hashedPassword
+          
      })
      .then((data)=>{
           res.send(data)
@@ -44,17 +39,40 @@ exports.getUsers=(req,res)=>{
           console.log(err)
      })
  }
+
+ exports.updateuser=(req,res)=>{
+    var newdata=new User({
+           fullname:req.body.data.fullname,
+           gender:req.body.data.gender,
+           e_mail:req.body.data.e_mail
+       })
+    
+        User.findOne({_id:req.body.id} )
+        .then((value) => {
+            console.log(value)
+            User.updateOne({_id:req.body.id},{$set:req.body.data})
+            .then((record)=>{
+                res.send(record)
+                console.log(record)
+            })
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the User."
+            });
+        });
+    }
+
  exports.login=async(req,res)=>{
      try{
-         await User.findOne({Email:req.body.Email})
+         await User.findOne({email:req.body.email})
         
          .then(async (user)=>{
              if(user){
-                 const checkPassword=await hash.verifyPassword(req.body.Password,user.Password)
+                 const checkPassword=await hash.verifyPassword(req.body.password,user.password)
                  if(checkPassword){
                      const payload={
-                         Email:user.Email,
-                         Name:user.Name
+                         email:user.email,
+                         name:user.name
                      }
                      const token= await jwt.generateToken(payload)
                      res.send({

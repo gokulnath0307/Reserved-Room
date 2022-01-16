@@ -1,51 +1,61 @@
-const Booking=require('../../Model/BookingForm/BookingForm');
+const Booking = require('../../Model/BookingForm/BookingForm');
 
-exports.register=(req,res)=>{
+exports.register = (req, res) => {
+         
+     Booking.create(req.body)
+          .then((data) => {
+               res.send(data)
+               console.log(data)
+          })
+          .catch((err) => {
+               return err
+          })
 
-     let date_ob = new Date();
-     let date = ("0" + date_ob.getDate()).slice(-2);
-     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-     let year = date_ob.getFullYear();
-
-     console.log(year + "-" + month + "-" + date);
-     
-
-     Booking.create({
-          Department:req.body.Department,
-          Reason:req.body.Reason,
-          Name:req.body.Name,
-          Email:req.body.Email,
-          Date:date,
-          StartingTime:req.body.StartingTime,
-          EndingTime:req.body.EndingTime
-
-     })
-     .then((data)=>{
-          res.send(data)
-          console.log(data)
-     })
-     .catch((err)=>{
-          console.log(err)
-     })
-     
 }
 
-exports.getBooking=(req,res)=>{
+exports.getBooking = (req, res) => {
      Booking.find({
-          Date:req.body.Date
+          startingTime:{$gte:moment(req.query.startingTime).toDate()},
+          endingTime:{$lte:moment(req.query.endingTime).toDate()}
      })
-     .sort({
-          StartingTime:req.body.StartingTime,
-          EndingTime:req.body.EndingTime
-     })
-     
-     .then((data)=>{
-          res.send(data)
-          console.log(data)
-     })
+          
+
+          .then((events) => {
+               res.send(events)
+               console.log(events)
+          })
+          .catch(err=>{
+               console.log(err)
+          })
 }
-exports.deleteBooking=(req,res)=>{
+exports.deleteBooking = (req, res) => {
      Booking.deleteOne({
-          id:req.body.id
+          id: req.body.id
      })
 }
+
+exports.updateBooking=(req,res)=>{
+
+     var data=req.body.data
+   
+     Booking.findOne({_id:data.id})
+     .then((value)=>{
+        
+      const addressData={
+          
+          startingTime:data.startingTime,
+          endingTime:data.endingTime
+       }
+   
+       Booking.updateOne({_id:data.id},{$set:addressData})
+       .then((value)=>{
+           res.send(value)
+       }).catch((err)=>{
+           console.log(err)
+       })
+       
+     }).catch((err)=>{
+         console.log(err)
+     })
+      
+   }

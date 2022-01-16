@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button,  Col, Container, Row } from "react-bootstrap"
-import Booking from '../Forms/Booking'
 import Login from '../Forms/login'
 import Register from '../Forms/Register'
 import "./Table.css"
@@ -38,7 +37,7 @@ const data = [
 export default function Table() {
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister,setShowRegister]=useState(false)
-    const [showBooking,setShowBooking]=useState(false)
+   
 
     return (
         <Container className='Table'>
@@ -74,15 +73,13 @@ export default function Table() {
                         <Button className='mx-2' variant='info' onClick={() => setShowRegister(true)}>
                             Register
                         </Button>
-                        <Button variant='info' onClick={() => setShowBooking(true)}>
-                            Booking
-                        </Button>
+                        
                     </Col>
                 </Row>
             
             <Login show={showLogin} onHide={() => setShowLogin(false)} />
             <Register show={showRegister} onHide={() => setShowRegister(false)} />
-            <Booking show={showBooking} onHide={() => setShowBooking(false)} />
+            
 
         </Container>
     )

@@ -2,32 +2,28 @@ const mongoose=require('mongoose')
 
 const BookingFormSchema=mongoose.Schema({
 
-     Department:{
+     department:{
           type:String,
           require:true
      },
-     Reason:{
+     reason:{
           type:String,
           require:true
      },
-     Name:{
+     name:{
           type:String,
           require:true
      },
-     Email:{
+     email:{
           type:String,
           require:true
      },
-     Date:{
+     startingTime:{
           type:Date,
           require:true
      },
-     StartingTime:{
-          type:String,
-          require:true
-     },
-     EndingTime:{
-          type:String,
+     endingTime:{
+          type:Date,
           require:true
      }
 
