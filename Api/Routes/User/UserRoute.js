@@ -9,4 +9,4 @@ router.post('/login',User.login)
 router.put('/updateuser',User.updateuser)
 
 
-module.exports=router;
+module.exports=router;  

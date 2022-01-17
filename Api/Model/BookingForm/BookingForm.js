@@ -2,30 +2,12 @@ const mongoose=require('mongoose')
 
 const BookingFormSchema=mongoose.Schema({
 
-     department:{
-          type:String,
-          require:true
-     },
-     reason:{
-          type:String,
-          require:true
-     },
-     name:{
-          type:String,
-          require:true
-     },
-     email:{
-          type:String,
-          require:true
-     },
-     startingTime:{
-          type:Date,
-          require:true
-     },
-     endingTime:{
-          type:Date,
-          require:true
-     }
+     // department:String,
+     // reason:String,
+     // name:String,
+     email:String,
+     startingTime:Date,
+     endingTime:Date
 
 })
 module.exports =mongoose.model('Booking',BookingFormSchema)

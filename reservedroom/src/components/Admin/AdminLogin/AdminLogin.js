@@ -27,7 +27,7 @@ export default class AdminLogin extends React.Component {
       this.setState({ errors: [] });
       console.log("going to see axios");
 
-      Axios.post("http://localhost:5000/Admin/login", data)
+      Axios.post("/admin/login", data)
         .then((response) => {
           console.log(response.data);
           if (response.data === "Username not found") {

@@ -10,6 +10,8 @@ export default function AdminPage() {
             
             <Routes>
                 <Route path='/admin' element={<AdminLogin/>}  />
+                <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+                <Route path='/admin/homepage' element={<AdminHomepage/>}/>
             </Routes>
         </div>
        

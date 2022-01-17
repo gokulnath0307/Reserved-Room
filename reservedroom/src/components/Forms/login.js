@@ -5,40 +5,67 @@ import "./Form.css"
 
 export default function Login({show,onHide}) {
  
-  const[email,setEmail]=useState('')
-  const[password,setPassword]=useState('')
- 
-  const handleSubmit=()=>{
-    axios.post('/User/login',)
-    .then(res=>{alert(res.data.message)})
-    window.location('/')
-  }
-
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault()
-
-  //   const response = await fetch('/User/login', {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       email, password
-  //     })
-  //   })
-
-  //   const data = await response.json()
-
-  //   if (!data) {
-  //     alert("Invaild password")
-  //   } else {
-  //     alert("login Successfull")
-  //     window.location('/')
-  //   }
-  // }
-
-
+  const[login,setLogin]=useState({
+    email:'',
+    password:''
+  })
+  const [err,setErr]=useState([])
   
+  const handleInput=(e)=>{
+    e.preventDefault()
+    const {name,value}=e.target
+    setLogin({
+      ...login,[name]:value
+    })
+  }
+ 
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+
+    const data={
+      email:login.email,
+      password:login.password
+    }
+    if(formVaild){
+      console.log("working");
+      setErr({errors:[]})
+      console.log("going to see axios");
+      axios.post('/user/login',data)
+      .then(res=>{
+        if(res.data === "Email id not found"){
+          alert("Email id not found")
+        }else if(res.data === "Incorrect Password"){
+          alert("Incorrect Password")
+        }else{
+          alert("Login Successfully")
+          
+          window.location='/booking'
+        }
+      })
+    }
+  }
+  const formVaild=()=>{
+    let error;
+    let handleErr=err
+    if(formEmpty(err)){
+      error={message:"fill the the fields"}
+      handleErr.push(error)
+      
+      setErr({errors:handleErr});
+      handleErr =[];
+    }else{
+      setErr({errors:[]})
+      return true
+    }
+  }
+  const formEmpty=({email,password})=>{
+    
+    if(!email.length||!password.length){
+      return true
+    }else{
+      return false
+    }
+  }
 
 
 
@@ -57,16 +84,16 @@ export default function Login({show,onHide}) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='mx-5'>
-          <form method='POST'  >
+          <form>
             <label>Email</label>
             <div className='form'>
-              <input type='text' value={email} onChange={e=>setEmail(e.target.value)} className='' placeholder='Email' />
+              <input type='text' name='email' value={login.email} onChange={(e)=>handleInput(e)} className='' placeholder='Email' required/>
             </div>
             <label>Password</label>
             <div className='form'>
-              <input type='text' value={password} onChange={e=>setPassword(e.target.value)} className='' placeholder='Password' />
+              <input type='text' name='password' value={login.password} onChange={(e)=>handleInput(e)} className='' placeholder='Password' required />
             </div>
-            <button type='submit' onClick={() => handleSubmit()} className='formButton'>Register</button>
+            <button type='submit' onClick={(e) => handleSubmit(e)} className='formButton'>Login</button>
           </form>
         </Modal.Body>
 

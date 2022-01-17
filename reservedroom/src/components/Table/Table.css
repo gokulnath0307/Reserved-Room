@@ -2,17 +2,26 @@
     margin: 50px auto;
 }
 table {
-    border: 2px solid forestgreen;
+    border: 1px solid black;
     width: 100%;
-    height: 500px;
+    height: 0%;
   }
     
   th {
     border-bottom: 1px solid black;
     text-align: center;
+    padding: 30px;
+    margin: 10px 70px;
   }
-    
+  
   td {
     text-align: center;
-    margin: 0px 50px;
+  }
+  tr{
+    margin: 5px;
+  }
+
+  .slick-slide td {
+    width: 500px;
+    height: 50px;
   }

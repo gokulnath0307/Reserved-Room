@@ -28,13 +28,13 @@ mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true
 
 
 
-app.use('/BookingForm', BookingRoute)
+app.use('/booking', BookingRoute)
 
-app.use('/DayCard', DayCardRoute)
+app.use('/dayCard', DayCardRoute)
 
-app.use('/Admin', AdminRoute)
+app.use('/admin', AdminRoute)
 
-app.use('/User', UserRoute)
+app.use('/user', UserRoute)
 
 
 

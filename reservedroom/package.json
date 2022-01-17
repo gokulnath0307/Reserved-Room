@@ -1,5 +1,5 @@
 {
-  "name": "casestudy",
+  "name": "reserved-room",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
@@ -21,6 +21,8 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
+    "react-slick": "^0.28.1",
+    "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

@@ -3,11 +3,11 @@ const hash=require('../../Token/Bcrypt')
 const jwt=require('../../Token/Jwtoken')
 
 exports.register=async(req,res)=>{
-     const hashedPassword= await hash.hashPassword(req.body.Password)
+     const hashedPassword= await hash.hashPassword(req.body.password)
      Admin.create({
-          Name:req.body.Name,
-          Username:req.body.Name,
-          Password:hashedPassword
+        name:req.body.name,
+          username:req.body.username,
+          password:hashedPassword
      })
      .then((data)=>{
           res.send(data)
@@ -30,15 +30,15 @@ exports.getAdmin=(req,res)=>{
 
  exports.login=async(req,res)=>{
      try{
-         await Admin.findOne({Username:req.body.Username})
+         await Admin.findOne({username:req.body.username})
          .then(async (admin)=>{
            
              if(admin){
-                 const checkPassword=await hash.verifyPassword(req.body.Password,admin.Password)
+                 const checkPassword=await hash.verifyPassword(req.body.password,admin.password)
                  if(checkPassword){
                      const payload={
-                         Username:admin.Username,
-                         Name:admin.Name
+                         username:admin.username,
+                         name:admin.name
                      }
                      const token= await jwt.generateToken(payload)
                      res.send({

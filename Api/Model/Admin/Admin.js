@@ -2,15 +2,15 @@ const mongoose=require('mongoose')
 
 const AdminSchema=mongoose.Schema({
 
-     Name:{
+     name:{
           type:String,
           require:true
      },
-     Username:{
+     username:{
           type:String,
           require:true
      },
-     Password:{
+     password:{
           type:String,
           require:true
      }

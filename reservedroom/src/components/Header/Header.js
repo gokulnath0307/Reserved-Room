@@ -1,5 +1,5 @@
 import React from 'react'
-import Table from '../Table/Table'
+
 import './Header.css'
 
 export default function Header() {
@@ -13,7 +13,7 @@ export default function Header() {
                 </p>
                 </p>
         </div>
-       <Table/>
+  
         </div>
     )
 }

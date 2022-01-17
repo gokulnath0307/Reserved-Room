@@ -1,33 +1,48 @@
 const Booking = require('../../Model/BookingForm/BookingForm');
+const router = require('express').Router()
 
-exports.register = (req, res) => {
-         
-     Booking.create(req.body)
-          .then((data) => {
-               res.send(data)
-               console.log(data)
-          })
-          .catch((err) => {
-               return err
-          })
+// exports.register =async (req, res) => {
+    
+//      Booking.create(req.body)
+//           .then((data) => {
+//                res.send(data)
+//                console.log(data)
+//           })
+//           .catch((err) => {
+//                return err
+//           })
 
-}
+// }
 
-exports.getBooking = (req, res) => {
-     Booking.find({
+router.post('/add',async(req,res)=>{
+     const booking=Booking(req.body)
+     await booking.save()
+     
+})
+
+// exports.getBooking = (req, res) => {
+//      Booking.find({
+//           startingTime:{$gte:moment(req.query.startingTime).toDate()},
+//           endingTime:{$lte:moment(req.query.endingTime).toDate()}
+//      })
+          
+
+//           .then((events) => {
+//                res.send(events)
+//                console.log(events)
+//           })
+//           .catch(err=>{
+//                console.log(err)
+//           })
+// }
+
+router.get('/getBooking',async(req,res)=>{
+     const booking=await Booking.find({
           startingTime:{$gte:moment(req.query.startingTime).toDate()},
           endingTime:{$lte:moment(req.query.endingTime).toDate()}
      })
-          
-
-          .then((events) => {
-               res.send(events)
-               console.log(events)
-          })
-          .catch(err=>{
-               console.log(err)
-          })
-}
+     res.send(booking)
+})
 exports.deleteBooking = (req, res) => {
      Booking.deleteOne({
           id: req.body.id

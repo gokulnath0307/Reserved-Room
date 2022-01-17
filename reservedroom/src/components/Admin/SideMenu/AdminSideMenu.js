@@ -2,13 +2,14 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import '../Admin.css'
 
 export default function AdminSideMenu() {
   
   return (
     <Card className="AdminSideMenu">
       <ul className="list-unstyled submenu text-start">
-      <a href="/admin/dashboard" className="text-decoration-none">
+      <a href="/admin/dashboard" className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
            
@@ -17,7 +18,7 @@ export default function AdminSideMenu() {
             Dashboard
           </li>
         </a>
-        <a href="/admin/homepage" className="text-decoration-none">
+        <a href="/admin/homepage" className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
            
@@ -26,7 +27,7 @@ export default function AdminSideMenu() {
            Home Page
           </li>
         </a>
-        <a href="/admin" className="text-decoration-none">
+        <a href="/    " className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
            

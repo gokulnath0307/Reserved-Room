@@ -1,6 +1,7 @@
 const User=require('../../Model/User/User')
 const hash=require('../../Token/Bcrypt')
 const jwt=require('../../Token/Jwtoken')
+const router =require('express').Router()
 
 exports.register= async(req,res)=>{
      const hashedPassword= await hash.hashPassword(req.body.password)
@@ -42,9 +43,8 @@ exports.getUsers=(req,res)=>{
 
  exports.updateuser=(req,res)=>{
     var newdata=new User({
-           fullname:req.body.data.fullname,
-           gender:req.body.data.gender,
-           e_mail:req.body.data.e_mail
+           name:req.body.data.name,
+           email:req.body.data.email
        })
     
         User.findOne({_id:req.body.id} )
@@ -83,7 +83,7 @@ exports.getUsers=(req,res)=>{
                      res.send('Incorrect Password')
                  }
              }else{
-                 res.send('Username not found')
+                 res.send('Email id not found')
              }
          })
      }catch(err){
