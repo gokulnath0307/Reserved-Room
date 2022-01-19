@@ -26,7 +26,7 @@ export default function Login({show,onHide}) {
       email:login.email,
       password:login.password
     }
-    if(formVaild){
+    if(formValid){
       console.log("working");
       setErr({errors:[]})
       console.log("going to see axios");
@@ -44,7 +44,7 @@ export default function Login({show,onHide}) {
       })
     }
   }
-  const formVaild=()=>{
+  const formValid=()=>{
     let error;
     let handleErr=err
     if(formEmpty(err)){

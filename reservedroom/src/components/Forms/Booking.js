@@ -12,7 +12,6 @@ export default function Booking({ show, onHide, onEventAdded }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     onEventAdded({
       department,
       reason,
@@ -41,7 +40,7 @@ export default function Booking({ show, onHide, onEventAdded }) {
           </Modal.Title>
         </Modal.Header> 
         <Modal.Body className='mx-5'>
-          <form onSubmit={onSubmit} >
+          <form >
             <label>Start Time</label>
             <div className='form'>
               <Datetime value={startingTime} onChange={date => setStartingTime(date)} />
@@ -67,9 +66,9 @@ export default function Booking({ show, onHide, onEventAdded }) {
               <input type='email' value={email} onChange={e => setEmail(e.target.value)} className='' placeholder='Enter Your Email ID' required/>
             </div>
 
-            <button className='formButton'>Booking</button>
+            <button onSubmit={(e)=>onSubmit(e)} className='formButton'>Booking</button>
              
-          </form>
+          </form >
 
 
         </Modal.Body>

@@ -20,28 +20,31 @@ export default function Register(props) {
     })
   }
 
-  const formValid=()=>{
-    let error
-    let handleErr=err
-    if(formEmpty(err)){
-      error={message:"fill the fields"}
-      handleErr.push(error)
-      setErr({errors:handleErr});
-      handleErr=[]
-    }else{
-      setErr({errors:[]})
-      return true
-    }
-    
-  }
+  // const formValid=()=>{
+  //   let error;
+  //   let handleErr=err
+  //   if(formEmpty(err)){
+  //     error={message:"fill the the fields"}
+  //     handleErr.push(error)
+      
+  //     setErr({errors:handleErr});
+  //     handleErr =[];
+  //   }else{
+  //     setErr({errors:[]})
+  //     return true
+  //   }
+  // }
 
-  const formEmpty=({name,department,email,password})=>{
-    if(!name.length||!department.length||!email.length||!password.length){
-      return true
-    }else{
-      return false
-    }
-  }
+  // const formEmpty=({name,department,email,password})=>{
+  //   if(!name.length ||
+  //     !department.length ||
+  //     !email.length || 
+  //     !password.length){
+  //     return true
+  //   }else{
+  //     return false
+  //   }
+  // }
 
     const handleSubmit=(e)=>{
       e.preventDefault()
@@ -52,19 +55,11 @@ export default function Register(props) {
         email:newUser.email,
         password:newUser.password
       }
-
-      if(formValid){
-        setErr({errors:[]})
-
-        axios.post('/user/register',data)
+      axios.post('/user/register',data)
         .then(()=>{
           alert("Registerd Successfully")
           window.location='/'
         })
-        .catch(()=>{
-          return false
-        })
-      }
     }
     
    const displayErr=(errormsg)=>{
@@ -97,20 +92,20 @@ export default function Register(props) {
           <form>
             <label>Name</label>
             <div className='form'>
-              <input type='text' value={newUser.name} name='name' onChange={(e)=>handleInput(e)} placeholder='Enter your Name' />
+              <input type='text' value={newUser.name} name='name' onChange={(e)=>handleInput(e)} placeholder='Enter your Name' required />
             </div>
             <label>Department</label>
             <div className='form'>
 
-              <input type='text' value={newUser.department} name='department' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Department' />
+              <input type='text' value={newUser.department} name='department' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Department' required/>
             </div>
             <label>Email</label>
             <div className='form'>
-              <input type='email' value={newUser.email} name='email' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Email ID' />
+              <input type='email' value={newUser.email} name='email' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Email ID' required/>
             </div>
             <label>Password</label>
             <div className='form'>
-              <input type='text' value={newUser.password} name='password' onChange={(e)=>handleInput(e)} className='' placeholder='Create a Your Password' />
+              <input type='text' value={newUser.password} name='password' onChange={(e)=>handleInput(e)} className='' placeholder='Create a Your Password' required/>
             </div>
 
             <p>

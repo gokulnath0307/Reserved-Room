@@ -142,6 +142,23 @@ h1 {
   padding: 15px;
   cursor: pointer;
 }
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+/* th,td{
+  border: 1px solid #fff;
+  padding: 4px;
+  font-size: 15px;
+  margin: 10px 10px;
+}
+th{
+  background-color: rgb(192, 192, 192);
+}
+td{
+  background-color: #d9d9d9;
+} */
 }
 
 /* 1024px Screen device view styles components */

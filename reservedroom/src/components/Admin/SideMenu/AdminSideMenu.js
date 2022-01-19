@@ -24,7 +24,7 @@ export default function AdminSideMenu() {
            
           >
             <FontAwesomeIcon icon={faAngleDoubleRight} className="mx-1" />
-           Home Page
+           Form 
           </li>
         </a>
         <a href="/    " className="adminmenu text-decoration-none">

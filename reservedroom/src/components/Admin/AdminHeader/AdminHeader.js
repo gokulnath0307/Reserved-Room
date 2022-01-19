@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Admin.css'
 
-export default function Header() {
+export default function AdminHeader() {
     return (
         <div>
             <div className='Header'>

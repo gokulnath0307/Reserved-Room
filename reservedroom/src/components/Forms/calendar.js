@@ -19,9 +19,9 @@ export default function Calendar() {
         calendarApi.addEvent({
             startingTime: moment(e.startingTime).toDate(),
             endingTime: moment(e.endingTime).toDate(),
-            // department: e.department,
-            // reason: e.reason,
-            // name: e.name,
+            department: e.department,
+            reason: e.reason,
+            name: e.name,
             email: e.email,
 
         })
@@ -29,11 +29,11 @@ export default function Calendar() {
 
     async function handleEventAdd(data) {
         console.log(data.booking )
-        await axios.post('http://localhost:5000/bookingForm/add', data.booking)
+        await axios.post('/booking/add', data.booking)
     }
 
     async function handleDateSet(data) {
-        const response = await axios.get('http://localhost:5000/booking/getBooking?startingTime=' +
+        const response = await axios.get('/booking/getBooking?startingTime=' +
             moment(data.startingTime).toISOString() +
             "&endingTime=" + moment(data.endingTime).toISOString())
         setEvent(response.data)
@@ -63,8 +63,8 @@ export default function Calendar() {
                     </Col>
                 </Row>
                 <Booking show={showBooking} onHide={() => setShowBooking(false)} onEventAdded={(e)=>onEventAdded(e)}/>
-            </Container>
-        </div>
+            </Container> 
+ ``       </div>
     )
 }
  
