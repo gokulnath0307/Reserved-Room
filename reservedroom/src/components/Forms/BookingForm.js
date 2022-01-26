@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import { Modal,Row,Col } from 'react-bootstrap'
 import Datetime from 'react-datetime';
 
-export default function Booking({ show, onHide, onEventAdded }) {
+export default function Booking({ show, onHide }) {
   const [department, setDepartment] = useState('')
   const [reason, setReason] = useState('')
   const [name, setName] = useState('')
@@ -12,16 +12,18 @@ export default function Booking({ show, onHide, onEventAdded }) {
   const [endingTime, setEndingTime] = useState(new Date())
 
   const onSubmit = (e) => {
-   // e.preventDefault();
-    onEventAdded({
-      date,
-      startingTime,
-      endingTime,
-      department,
-      reason,
-      name,email
-    })
-    onHide()
+    e.preventDefault();
+    console.log(e)
+   
+    // onEventAdded({
+    //   date,
+    //   startingTime,
+    //   endingTime,
+    //   department,
+    //   reason,
+    //   name,email
+    // })
+    // onHide()
 
    // console.log(onEventAdded)
 
@@ -41,19 +43,16 @@ export default function Booking({ show, onHide, onEventAdded }) {
           </Modal.Title>
         </Modal.Header> 
         <Modal.Body className='mx-5'>
-          <form onSubmit={(e)=>onSubmit(e)}>
-            <label>Start Time</label>
+          <form >
+            {/* <label>Start Time</label>
             <div className='form'>
               <Datetime value={startingTime} onChange={date => setStartingTime(date)} />
             </div>
             <label>End Time</label>
             <div className='form'>
               <Datetime value={endingTime} onChange={date => setEndingTime(date)} />
-            </div>
-            <label>Date</label>
-            <div className='form'>
-              <input type='date' value={date} onChange={e => setDate(e.target.value)} className='' placeholder='Select the event Date' required/>
-            </div>
+            </div> */}
+
             <label>Department</label>
             <div className='form'>
               <input type='text' value={department} onChange={e => setDepartment(e.target.value)} className='' placeholder='Enter Your Department' required/>
@@ -71,7 +70,25 @@ export default function Booking({ show, onHide, onEventAdded }) {
               <input type='email' value={email} onChange={e => setEmail(e.target.value)} className='' placeholder='Enter Your Email ID' required/>
             </div>
 
-            <button type='submit' className='formButton'>Booking</button>
+            <label>Date</label>
+            <div className='form'>
+              <input type='datetime-local' value={date} onChange={e => setDate(e.target.value)} className='' placeholder='Select the event Date' required/>
+            </div>
+           {/* <Row>
+             <Col lg={6}>
+             <label>Starting Time</label>
+            <div className='form'>
+              <input type='time' value={date} onChange={e => setDate(e.target.value)} className='' placeholder='Select the event Date' required/>
+            </div>
+             </Col>
+             <Col lg={6}>
+             <label>Ending Time</label>
+            <div className='form'>
+              <input type='time' value={date} onChange={e => setDate(e.target.value)} className='' placeholder='Select the event Date' required/>
+            </div>
+             </Col>
+           </Row> */}
+            <button type='submit' onSubmit={(e)=>onSubmit(e)} className='formButton'>Booking</button>
              
           </form >
 

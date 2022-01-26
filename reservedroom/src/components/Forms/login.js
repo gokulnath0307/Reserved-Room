@@ -26,10 +26,11 @@ export default function Login({show,onHide}) {
       email:login.email,
       password:login.password
     }
-    if(formValid){
-      console.log("working");
+  console.log(data)
+    if(formValid){    
+     // console.log("working");
       setErr({errors:[]})
-      console.log("going to see axios");
+     // console.log("going to see axios");
       axios.post('/user/login',data)
       .then(res=>{
         if(res.data === "Email id not found"){
@@ -37,9 +38,10 @@ export default function Login({show,onHide}) {
         }else if(res.data === "Incorrect Password"){
           alert("Incorrect Password")
         }else{
+          localStorage.setItem('userToken',res.data)
           alert("Login Successfully")
-          
           window.location='/booking'
+          // console.log(res.data)
         }
       })
     }

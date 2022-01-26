@@ -75,10 +75,10 @@ exports.getUsers=(req,res)=>{
                          name:user.name
                      }
                      const token= await jwt.generateToken(payload)
-                     res.send({
-                         success:true,
-                         token:"Bearer "+token
-                     })
+                     res.send(
+                        
+                         "Bearer "+token
+                        )
                  }else{
                      res.send('Incorrect Password')
                  }

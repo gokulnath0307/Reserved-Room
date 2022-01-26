@@ -19,15 +19,7 @@ exports.register = (req, res) => {
      
      console.log(req.body)
     
-     Booking.create({
-          department:req.body.department,
-          reason:req.body.reason,
-          name:req.body.name,
-          email:req.body.email,
-          date:currentDate,
-          startingTime:req.body.startingTime,
-          endingTime:req.body.endingTime,
-     })
+     Booking.create(req.body)
           .then((data) => {
                res.send(data)
                console.log(data)
@@ -43,9 +35,9 @@ exports.register = (req, res) => {
 exports.getBooking = (req, res) => {
      Booking.find({
 
-          // startingTime:{$gte:moment(req.query.startingTime).toDate()},
-          // endingTime:{$lte:moment(req.query.endingTime).toDate()}
-          user:req.body.userid
+          startingTime:{$gte:moment(req.query.startingTime).toDate()},
+          endingTime:{$lte:moment(req.query.endingTime).toDate()}
+         // user:req.body.userid
      })
           
 

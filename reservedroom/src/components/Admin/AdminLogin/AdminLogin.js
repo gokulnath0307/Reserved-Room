@@ -40,6 +40,7 @@ export default class AdminLogin extends React.Component {
             alert("Login Successful");
             localStorage.setItem("userToken", response.data);
             window.location = "/admin/dashboard";
+            console.log(response.data)
           }
         })
         .catch((err) => {

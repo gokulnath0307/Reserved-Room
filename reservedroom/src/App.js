@@ -12,8 +12,8 @@ function App() {
         {(
           window.location.pathname === '/admin' ||
           window.location.pathname === '/admin/dashboard' ||
-          window.location.pathname === '/admin/homepage'||
-          window.location.pathname === '/booking'
+          window.location.pathname === '/admin/homepage'
+         // window.location.pathname === '/booking'
         ) ?
           <AdminPage /> : <Header />
         }

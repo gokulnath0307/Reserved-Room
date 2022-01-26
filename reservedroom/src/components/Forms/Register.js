@@ -11,7 +11,7 @@ export default function Register(props) {
     password: ''
   })
   const [err,setErr]=useState([])
-
+  
   const handleInput=(e)=>{
     e.preventDefault()
     const{name,value}=e.target
@@ -20,32 +20,28 @@ export default function Register(props) {
     })
   }
 
-  // const formValid=()=>{
-  //   let error;
-  //   let handleErr=err
-  //   if(formEmpty(err)){
-  //     error={message:"fill the the fields"}
-  //     handleErr.push(error)
+  const formValid=()=>{
+    let error;
+    let handleErr=err
+    if(formEmpty(err)){
+      error={message:"fill the the fields"}
+      handleErr.push(error)
       
-  //     setErr({errors:handleErr});
-  //     handleErr =[];
-  //   }else{
-  //     setErr({errors:[]})
-  //     return true
-  //   }
-  // }
-
-  // const formEmpty=({name,department,email,password})=>{
-  //   if(!name.length ||
-  //     !department.length ||
-  //     !email.length || 
-  //     !password.length){
-  //     return true
-  //   }else{
-  //     return false
-  //   }
-  // }
-
+      setErr({errors:handleErr});
+      handleErr =[];
+    }else{
+      setErr({errors:[]})
+      return true
+    }
+  }
+  const formEmpty=({ department,reason,name,email,password})=>{
+    
+    if(!department.length || !reason.length ||!name.length || !email.length ||!password.length){
+      return true
+    }else{
+      return false
+    }
+  }
     const handleSubmit=(e)=>{
       e.preventDefault()
 
@@ -55,23 +51,20 @@ export default function Register(props) {
         email:newUser.email,
         password:newUser.password
       }
-      axios.post('/user/register',data)
-        .then(()=>{
-          alert("Registerd Successfully")
-          window.location='/'
-        })
+     if(formValid){
+       setErr({errors:[]})
+       axios.post('/user/register',data)
+       .then(()=>{
+         alert("Registerd Successfully")
+         window.location='/'
+       })
+       .catch(err=>{
+         console.log(err)
+       })
+     }
     }
     
-   const displayErr=(errormsg)=>{
-    console.log("we are in displayerrors")
-
-    console.log(errormsg)
-
- return  errormsg.map((error)=> 
-        <p>{error.message}</p>
-   )
-  
-}
+   
 
 
 
@@ -101,18 +94,13 @@ export default function Register(props) {
             </div>
             <label>Email</label>
             <div className='form'>
-              <input type='email' value={newUser.email} name='email' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Email ID' required/>
+              <input type='email' value={newUser.email} name='email' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Email ID' required />
             </div>
             <label>Password</label>
             <div className='form'>
               <input type='text' value={newUser.password} name='password' onChange={(e)=>handleInput(e)} className='' placeholder='Create a Your Password' required/>
             </div>
 
-            <p>
-              {setErr.length>0&&(
-                <div>{displayErr(err)}</div>
-              )}
-            </p>
             <button type='submit' onClick={(e)=>handleSubmit(e)} className='formButton'>Register</button>
           </form>
         </Modal.Body>
