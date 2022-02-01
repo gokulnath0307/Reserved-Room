@@ -13,3 +13,9 @@ input{
     color: white;
     border-style: groove;
 }
+option{
+    margin: 50px;
+    padding: 50px 0;
+    background-color: white;
+
+}

@@ -23,9 +23,9 @@ export default class AdminLogin extends React.Component {
       password: this.state.password,
     };
     if (this.isFormvalid()) {
-      console.log("working");
+     // console.log("working");
       this.setState({ errors: [] });
-      console.log("going to see axios");
+    //  console.log("going to see axios");
 
       Axios.post("/admin/login", data)
         .then((response) => {

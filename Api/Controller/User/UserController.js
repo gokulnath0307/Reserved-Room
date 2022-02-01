@@ -31,7 +31,7 @@ exports.getUser=(req,res)=>{
      })
 }
 exports.getUsers=(req,res)=>{
-     User.findOne({_id:req.body.id})
+     User.findOne({})
      .then((data)=>{
           res.send(data)
           console.log(data)

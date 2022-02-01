@@ -40,7 +40,7 @@ export default function Login({show,onHide}) {
         }else{
           localStorage.setItem('userToken',res.data)
           alert("Login Successfully")
-          window.location='/booking'
+          window.location='/'
           // console.log(res.data)
         }
       })

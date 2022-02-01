@@ -18,16 +18,16 @@ export default function AdminSideMenu() {
             Dashboard
           </li>
         </a>
-        <a href="/admin/homepage" className="adminmenu text-decoration-none">
+
+        <a href="/admin/userdetails" className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
-           
           >
             <FontAwesomeIcon icon={faAngleDoubleRight} className="mx-1" />
-           Form 
+           User Details 
           </li>
         </a>
-        <a href="/    " className="adminmenu text-decoration-none">
+        <a href="/" className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
            

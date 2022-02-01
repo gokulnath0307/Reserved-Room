@@ -1,72 +1,60 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import axios from "axios";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 export default function Register(props) {
 
-  const [newUser, setNewUser] = useState({
-    name: '',
-    department: '',
-    email: '',
-    password: ''
-  })
-  const [err,setErr]=useState([])
+  const [name,setName]=useState('');
+  const [department,setDepartment]=useState('')
+  const [email,setEmail]=useState('')
+  const [password ,setPassword]=useState('')
+  const [err, setErr] = useState([]);
+
   
-  const handleInput=(e)=>{
-    e.preventDefault()
-    const{name,value}=e.target
-    setNewUser({
-      ...newUser,[name]:value
-    })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const formValid=()=>{
-    let error;
-    let handleErr=err
-    if(formEmpty(err)){
-      error={message:"fill the the fields"}
-      handleErr.push(error)
-      
-      setErr({errors:handleErr});
-      handleErr =[];
-    }else{
-      setErr({errors:[]})
-      return true
+    const data={
+      name,department,email,password
     }
-  }
-  const formEmpty=({ department,reason,name,email,password})=>{
-    
-    if(!department.length || !reason.length ||!name.length || !email.length ||!password.length){
-      return true
-    }else{
-      return false
+    if(validate()){
+      setErr(err)
+      console.log(data)
+      axios.post('/user/register',data)
+    //  console.log(data)
+      .then(()=>{
+        
+        alert("Registerd Successfully")
+        window.location='/'
+      })
+      .catch(err=>{
+        console.log(err)
+      })
     }
-  }
-    const handleSubmit=(e)=>{
-      e.preventDefault()
+  };
 
-      const data={
-        name:newUser.name,
-        department:newUser.department,
-        email:newUser.email,
-        password:newUser.password
-      }
-     if(formValid){
-       setErr({errors:[]})
-       axios.post('/user/register',data)
-       .then(()=>{
-         alert("Registerd Successfully")
-         window.location='/'
-       })
-       .catch(err=>{
-         console.log(err)
-       })
-     }
+  const validate = (values) => {
+    const errors = [];
+    const regex = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+
+    if (!name) {
+      errors.name = "Name is required";
     }
-    
-   
-
-
+    if (!department) {
+      errors.department = "Department is required";
+    }
+    if (!email) {
+      errors.email = "Email id is required";
+    }else if(regex.test(email)){
+      errors.email="This is not a valid email format"
+    }
+    if (!password.length >4) {
+      errors.password = "Password must be 4 character";
+    } else if (password <8) {
+      errors.password = "Password must be 8 character";
+    }
+    return errors;
+  };
 
   return (
     <div>
@@ -81,31 +69,64 @@ export default function Register(props) {
             Register Form
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className='mx-5'>
-          <form>
+        <Modal.Body className="mx-5">
+          <form onSubmit={handleSubmit}>
             <label>Name</label>
-            <div className='form'>
-              <input type='text' value={newUser.name} name='name' onChange={(e)=>handleInput(e)} placeholder='Enter your Name' required />
+            <div className="form">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your Name"
+                required={true}
+              />
+              <p className="text-danger">{err.name}</p>
             </div>
             <label>Department</label>
-            <div className='form'>
-
-              <input type='text' value={newUser.department} name='department' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Department' required/>
+            <div className="form">
+              <input
+                type="text"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                className=""
+                placeholder="Enter Your Department"
+                required={true}
+              />
+              <p className="text-danger">{err.department}</p>
             </div>
             <label>Email</label>
-            <div className='form'>
-              <input type='email' value={newUser.email} name='email' onChange={(e)=>handleInput(e)} className='' placeholder='Enter Your Email ID' required />
+            <div className="form">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className=""
+                placeholder="Enter Your Email ID"
+                required={true}
+              />
+              <p className="text-danger">{err.email}</p>
             </div>
             <label>Password</label>
-            <div className='form'>
-              <input type='text' value={newUser.password} name='password' onChange={(e)=>handleInput(e)} className='' placeholder='Create a Your Password' required/>
+            <div className="form">
+              <input
+                type="text"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className=""
+                placeholder="Create a Your Password"
+                required={true}
+              />
+              <p className="text-danger">{err.password}</p>
             </div>
 
-            <button type='submit' onClick={(e)=>handleSubmit(e)} className='formButton'>Register</button>
+            <button
+               className="formButton"
+            >
+              Register
+            </button>
           </form>
         </Modal.Body>
-
       </Modal>
     </div>
-  )
+  );
 }

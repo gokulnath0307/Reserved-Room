@@ -2,33 +2,44 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Card, Container } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
+import {FaEdit} from 'react-icons/fa'
+import {MdDelete} from 'react-icons/md'
 import AdminHeader from '../AdminHeader/AdminHeader'
 import AdminSideMenu from '../SideMenu/AdminSideMenu'
 import '../Admin.css'
+import Update from '../../Forms/Update'
 
 export default function AdminDashboard() {
 
-    const [booking, setBooking] = useState([])
-    const [id] = useState('')
-    useEffect(() => {
-        axios.get(`/booking/getBooking/${id}`)
-            .then(res => {
-                setBooking(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+  
+    const [data,setData]=useState([])
+    const [showForm,setShowForm]=useState(false)
+   
+    useEffect(()=>{
         getBooking()
-    })
-
-    const getBooking = () => {
-        const token = localStorage.getItem('userToken')
-        console.log((token))
-        const decoded = jwt_decode(token)
-        console.log(decoded)
-        
-
+      },[])
+    
+    const getBooking= async()=>{
+      const response=await axios.get('/booking/getBooking');
+      if(response.status===200){
+        setData(response.data)
+      }
     }
+    console.log("data===",data)
+        
+    const deleteBooking= async(id)=>{
+            if(window.confirm("Are you delete the event")){
+                console.log(id)
+                const response =await axios.post('/booking/deleteBooking',{id})
+                if(response.status===200){
+                    alert('delete successfully')
+                    getBooking(response._id); 
+                }
+            }
+    }
+
+    
+
     return (
         <div>
             <div>
@@ -51,16 +62,26 @@ export default function AdminDashboard() {
                                         <th>Date</th>
                                         <th>Starting Time</th>
                                         <th>Ending Time</th>
+                                        <th>Edit/Delete</th>
 
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            {booking.map(value =>
-                                                <tr>
-                                                    <td>{value.department}</td>
+                                    <tbody className='p-3'>
+                                        
+                                            {data.map((value,index) =>
+                                                <tr key={index} >
+                                                    <td className='p-3'>{value.department}</td>
+                                                    <td className='p-3'>{value.reason}</td>
+                                                    <td className='p-3'>{value.name}</td>
+                                                    <td className='p-3'>{value.date}</td>
+                                                    <td className='p-3'>{value.start}</td>
+                                                    <td className='p-3'>{value.end}</td>
+                                                    <td >
+                                           <FaEdit onClick={()=>setShowForm(true)}size={28} className='mx-2' />
+                                           <MdDelete onClick={()=>deleteBooking(value._id)} size={28} className='mx-2'/>
+                                       </td>
                                                 </tr>
                                             )}
-                                        </tr>
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -68,6 +89,7 @@ export default function AdminDashboard() {
                     </Col>
                 </Row>
             </Container>
+            <Update show={showForm} onHide={()=>setShowForm(false)}/>
         </div>
     )
 }

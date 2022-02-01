@@ -1,38 +1,38 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
-const BookingFormSchema=mongoose.Schema({
+const BookingFormSchema = mongoose.Schema({
 
-     department:{
-          type:String,
-          require:true
+     department: {
+          type: String,
+          require: true
      },
-     reason:{
-          type:String,
-          require:true
+     reason: {
+          type: String,
+          require: true
      },
-     name:{
-          type:String,
-          require:true
+     name: {
+          type: String,
+          require: true
      },
-     email:{
-          type:String,
-          require:true
+     email: {
+          type: String,
+          require: true
      },
-     date:{
-          type:Date ,
-          require:true
-         
+     date: {
+          type: String,
+          require: true
+
      },
-     startingTime:{
-          type:Date,
-          require:true
+     start: {
+          type: String,
+          require: true
      },
-     endingTime:{
-          type:Date,
-          require:true
-          
-          
+     end: {
+          type: String,
+          require: true
+
+
      }
 
 })
-module.exports =mongoose.model('Booking',BookingFormSchema)
+module.exports = mongoose.model('Booking', BookingFormSchema)

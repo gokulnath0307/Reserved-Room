@@ -13,7 +13,7 @@ const UserRoute = require('./Routes/User/UserRoute')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
-
+app.use(express.json())
 
 mongoose.Promise = global.Promise
 
