@@ -1,3 +1,4 @@
+import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
 import AdminPage from './components/Admin/AdminPage'
 import Header from './components/Header/Header';
@@ -17,9 +18,6 @@ function App() {
         }
         <Routes>
           <Route path='/' element={<Table />} />
-
-          
-          
         </Routes>
       </div>
 
