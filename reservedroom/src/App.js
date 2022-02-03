@@ -1,5 +1,4 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom'
 import AdminPage from './components/Admin/AdminPage'
 import Header from './components/Header/Header';
 import Table from './components/Table/Table';
@@ -18,6 +17,8 @@ function App() {
         }
         <Routes>
           <Route path='/' element={<Table />} />
+
+          
           
         </Routes>
       </div>

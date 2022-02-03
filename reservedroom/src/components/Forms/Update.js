@@ -1,7 +1,6 @@
 import React, {  useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 export default function Update({ show, onHide }) {
   
@@ -9,17 +8,7 @@ export default function Update({ show, onHide }) {
   const [end, setEnd] = useState('')
   const [date ,setDate]=useState(new Date())
 
-  const onSubmit=()=>{
-    let data={
-        start,end,date
-    }
-    console.log(data)
-    axios.put('/booking/editBooking',{data})
-    .then(res=>{
-        
-    })
-  }
-  
+
   return (
     <div>
       <Modal
@@ -35,7 +24,7 @@ export default function Update({ show, onHide }) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='mx-5'>
-          <form onSubmit={onSubmit}>
+          <form >
               <label>Start Time</label>
             <div className='form'>
               <select className='form' value={start} onChange={e=>setStart(e.target.value)} required={true}>

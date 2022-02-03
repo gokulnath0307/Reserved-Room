@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Card, Container } from 'react-bootstrap'
-import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import {FaEdit} from 'react-icons/fa'
 import {MdDelete} from 'react-icons/md'
+import jwt_decode from 'jwt-decode' 
 import AdminHeader from '../AdminHeader/AdminHeader'
 import AdminSideMenu from '../SideMenu/AdminSideMenu'
 import '../Admin.css'
@@ -37,6 +37,11 @@ export default function AdminDashboard() {
                 }
             }
     }
+    //  const token = localStorage.getItem('userToken')
+    //     const decoded = jwt_decode(token)
+    //     const name = decoded.name
+    //     console.log(name)
+        
 
     
 

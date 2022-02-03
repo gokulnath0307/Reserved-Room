@@ -64,21 +64,23 @@ exports.deleteBooking = (req, res) => {
 
 exports.editBooking=(req,res)=>{
 
-     var data=req.body.data
+     
    
-     Booking.findOne({_id:data.id})
+     Booking.findOne({_id:req.body.id})
      .then(()=>{
         
       const bookingData={
           
-          start:data.start,
-          end:data.end,
-          date:data.date
+          start:req.body.start,
+          end:req.body.end,
+          date:req.body.date
        }
    
-       Booking.updateOne({_id:data.id},{$set:bookingData})
+       Booking.updateOne({_id:req.body.id},{$set:bookingData})
        .then((data)=>{
            res.send(data)
+
+           console.log(data)
        }).catch((err)=>{
            console.log(err)
        })

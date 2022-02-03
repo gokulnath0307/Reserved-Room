@@ -41,10 +41,8 @@ exports.getAdmin=(req,res)=>{
                          name:admin.name
                      }
                      const token= await jwt.generateToken(payload)
-                     res.send({
-                         success:true,
-                         token:"Bearer "+token
-                     })
+                     res.send(token)
+                     console.log(token)
                  }else{
                      res.send('Incorrect Password')
                  }

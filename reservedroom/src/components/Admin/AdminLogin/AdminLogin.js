@@ -38,7 +38,8 @@ export default class AdminLogin extends React.Component {
             window.location = "/admin";
           } else {
             alert("Login Successful");
-            localStorage.setItem("userToken", response.data);
+            localStorage.setItem("userToken", response.data)
+            localStorage.setItem("role","admin")
             window.location = "/admin/dashboard";
             console.log(response.data)
           }

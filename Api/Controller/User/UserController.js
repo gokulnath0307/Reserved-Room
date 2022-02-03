@@ -31,7 +31,7 @@ exports.getUser=(req,res)=>{
      })
 }
 exports.getUsers=(req,res)=>{
-     User.findOne({})
+     User.findOne({_id:req.body.id})
      .then((data)=>{
           res.send(data)
           console.log(data)
@@ -72,7 +72,8 @@ exports.getUsers=(req,res)=>{
                  if(checkPassword){
                      const payload={
                          email:user.email,
-                         name:user.name
+                         name:user.name,
+                         department:user.department
                      }
                      const token= await jwt.generateToken(payload)
                      res.send(

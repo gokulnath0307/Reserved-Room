@@ -27,7 +27,7 @@ export default function AdminSideMenu() {
            User Details 
           </li>
         </a>
-        <a href="/" className="adminmenu text-decoration-none">
+        <a href="/" onClick={localStorage.removeItem("userToken")} className="adminmenu text-decoration-none">
           <li
             className="border p-2 "
            

@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
 import AdminLogin from './AdminLogin/AdminLogin';
-import AdminHomepage from './Homepage/AdminHomepage';
+import AdminHomepage from './UserDetails/UserDetails';
 
 export default function AdminPage() {
     return (

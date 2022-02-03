@@ -1,7 +1,15 @@
 import React from 'react';
-import {  Button, ButtonGroup, Modal,Table } from 'react-bootstrap';
-
+import {Modal,Table } from 'react-bootstrap';
+import jwt_decode from 'jwt-decode'
 export default function Profile({ show, onHide }) {
+
+     const token = localStorage.getItem('userToken')
+        const decoded = jwt_decode(token)
+        const name = decoded.name
+        const department =decoded.department
+        const email =decoded.email
+
+
 
     return (
         <div>
@@ -21,22 +29,19 @@ export default function Profile({ show, onHide }) {
                     <Table bordered>
                         <tbody className="text-center fs-5">
                             <tr>
-                                <td>Depaertment</td>
-                                <td>mca</td>
+                                <td>Department</td>
+                                <td>{department}</td>
                             </tr>
                             <tr>
                                 <td>Name</td>
-                                <td>Gokul</td>
+                                <td>{name}</td>
                             </tr>
                             <tr>
                                 <td>Email ID</td>
-                                <td>tE@GMAIL.COM</td>
+                                <td>{email}</td>
                             </tr>
                         </tbody>
-                    </Table>
-                    
-                        <Button className='btn-warning p-2 m-2 w-auto'> Update</Button>  
-                    
+                    </Table> 
                 </Modal.Body>
 
             </Modal>

@@ -33,12 +33,14 @@ export default function Login({show,onHide}) {
      // console.log("going to see axios");
       axios.post('/user/login',data)
       .then(res=>{
+        console.log(res.data)
         if(res.data === "Email id not found"){
           alert("Email id not found")
         }else if(res.data === "Incorrect Password"){
           alert("Incorrect Password")
         }else{
           localStorage.setItem('userToken',res.data)
+          localStorage.setItem("role","user")
           alert("Login Successfully")
           window.location='/'
           // console.log(res.data)
